@@ -18,7 +18,27 @@ class PrototypesController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
     @prototype = Prototype.find(params[:id])
+  end
+
+  def edit
+    @prototype = Prototype.find(params[:id])
+  end
+
+  def update
+    @prototype = Prototype.find(params[:id])
+    if @prototype.update(prototype_params)
+       redirect_to prototype_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @prototype = Prototype.find(params[:id])
+    @prototype.destroy
+    redirect_to prototypes_path
   end
 
   private
