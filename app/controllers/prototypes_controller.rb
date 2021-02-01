@@ -1,4 +1,5 @@
 class PrototypesController < ApplicationController
+  
 
   def index
     @prototype = Prototype.all
@@ -18,8 +19,9 @@ class PrototypesController < ApplicationController
   end
 
   def show
-    @comment = Comment.new
     @prototype = Prototype.find(params[:id])
+    @comments = @prototype.comments.includes(:user)
+    @comment = Comment.new
   end
 
   def edit
